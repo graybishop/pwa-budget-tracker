@@ -20,6 +20,7 @@ request.onerror = function (event) {
 };
 
 //If the request is successful, and we are online, then check the database for data and transmit
+//Used if the user visits the site for the first time after being offline
 request.onsuccess = function (event) {
   db = event.target.result;
 
@@ -30,13 +31,14 @@ request.onsuccess = function (event) {
 
 // Called by the front end when the app is offline.
 // adds new financial transaction to the IndexedDB
-const saveRecord = (transaction) => {
-    // create a transaction on the pending db with readwrite access
-    let transaction = db.transaction('BudgetStore', 'readwrite')
-    // access your pending object store
-    let budgetStore = transaction.objectStore('BudgetStore')
-    // add record to your store with add method.
-    budgetStore.add(record)
+// eslint-disable-next-line no-unused-vars
+const saveRecord = (userTransaction) => {
+    // create a transaction on the db with readwrite access
+    let transaction = db.transaction(STORE, 'readwrite')
+    // accessing object store from the transaction
+    let budgetStore = transaction.objectStore(STORE)
+    // add record to store with add method.
+    budgetStore.add(userTransaction)
 }
 
 const checkDatabaseAndTransmit = () => {
