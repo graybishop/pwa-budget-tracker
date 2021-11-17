@@ -4,6 +4,7 @@ let db
 
 const request = indexedDB.open('BudgetDB', DB_VERSION);
 
+//If the server version is different, then do the following:
 request.onupgradeneeded = function (event) {
   db = event.target.result;
   
@@ -12,8 +13,26 @@ request.onupgradeneeded = function (event) {
   console.log(db)
 };
 
+// On an error with the db do the following:
+request.onerror = function (event) {
+  console.log(`RAN INTO AN ERROR`)
+  console.log(event)
+};
+
+//If the request is successful, and we are online, then check the database
+request.onsuccess = function (event) {
+  db = event.target.result;
+
+  if (navigator.onLine) {
+    checkDatabaseAndTransmit();
+  }
+};
 
 // Called by the front end when the app is offline
 const saveRecord = (transaction) => {
+  
+}
+
+const checkDatabaseAndTransmit = () => {
   
 }
