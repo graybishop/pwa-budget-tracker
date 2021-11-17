@@ -11,7 +11,7 @@ I've added some offline functionality to an app that let's the user track their 
 
 ## Link
 
-[Link to deployment]()
+[Link to deployment](https://infinite-journey-26809.herokuapp.com/)
 
 ## Featured Tech
 
